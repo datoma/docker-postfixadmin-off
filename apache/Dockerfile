@@ -12,6 +12,9 @@ RUN set -ex; \
 	libsqlite3-dev \
 	; \
 	\
+	docker-php-ext-configure imap --with-imap-ssl \
+	; \
+	\
 	docker-php-ext-install -j "$(nproc)" \
 		mysqli \
 		pdo_mysql \
@@ -20,6 +23,7 @@ RUN set -ex; \
 		pgsql \
 	; \
 	\
+#docker-php-ext-configure imap --with-imap-ssl
 # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
 	apt-mark auto '.*' > /dev/null; \
 	apt-mark manual $savedAptMark; \
